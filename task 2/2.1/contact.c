@@ -12,26 +12,26 @@ void getInput(char *prompt, char *buffer, size_t size, int required) {
         buffer[strcspn(buffer, "\n")] = '\0'; 
 
         if (required && strlen(buffer) == 0) {
-            printf("Поле не может быть пустым. Повторите ввод.\n");
+            printf("пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.\n");
         }
     } while (required && strlen(buffer) == 0);
 }
 
 void addContactInfo(ContactInfo* contactInfo) {
-    getInput("Введите номер телефона: ", contactInfo->Phone, MAX_LENGTH, 0);
-    getInput("Введите адрес электронной почты: ", contactInfo->Email, MAX_LENGTH, 0);
-    getInput("Введите ссылки на свои страницы и профили: ", contactInfo->Link, MAX_LENGTH, 0);
+    getInput("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: ", contactInfo->Phone, MAX_LENGTH, 0);
+    getInput("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: ", contactInfo->Email, MAX_LENGTH, 0);
+    getInput("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: ", contactInfo->Link, MAX_LENGTH, 0);
 }
 
 void addContact(Contact* contact) {
     if (count < MAX_CONTACTS) {
     getchar(); 
 
-    getInput("Введите фамилию (обязательное поле): ", contact->LastName, MAX_LENGTH, 1);
-    getInput("Введите имя (обязательное поле): ", contact->FirstName, MAX_LENGTH, 1);
-    getInput("Введите отчество: ", contact->MiddleName, MAX_LENGTH, 0);
-    getInput("Введите место работы: ", contact->Workplace, MAX_LENGTH, 0);
-    getInput("Введите должность: ", contact->Position, MAX_LENGTH, 0);
+    getInput("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ): ", contact->LastName, MAX_LENGTH, 1);
+    getInput("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ): ", contact->FirstName, MAX_LENGTH, 1);
+    getInput("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: ", contact->MiddleName, MAX_LENGTH, 0);
+    getInput("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: ", contact->Workplace, MAX_LENGTH, 0);
+    getInput("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: ", contact->Position, MAX_LENGTH, 0);
 
     addContactInfo(&contact->Info);
     contacts[count++] = *contact;
@@ -39,47 +39,47 @@ void addContact(Contact* contact) {
 }
 
 void printContactInfo(const ContactInfo* const contactInfo) {
-    printf("Номер телефона: %s\n", contactInfo->Phone);
-    printf("Адрес электронной почты: %s\n", contactInfo->Email); 
-    printf("Ссылки на страницы и профили: %s\n", contactInfo->Link);
+    printf("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: %s\n", contactInfo->Phone);
+    printf("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: %s\n", contactInfo->Email); 
+    printf("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: %s\n", contactInfo->Link);
 }
 
 void printContact(const Contact* const contact) {
-    printf("ФИО: %s %s %s\n", contact->LastName, contact->FirstName, contact->MiddleName);
-    printf("Место работы: %s\n", contact->Workplace); 
-    printf("Должность: %s\n", contact->Position);
+    printf("пїЅпїЅпїЅ: %s %s %s\n", contact->LastName, contact->FirstName, contact->MiddleName);
+    printf("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: %s\n", contact->Workplace); 
+    printf("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: %s\n", contact->Position);
     printContactInfo(&contact->Info);
 }
 
 void editContact(Contact* contact) {
     char input[MAX_LENGTH];
-    printf("Введите новые данные (оставьте пустым для сохранения текущего значения):\n");
-    printf("Фамилия (%s): ", contact->LastName); 
+    printf("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ):\n");
+    printf("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (%s): ", contact->LastName); 
     fgets(input, MAX_LENGTH, stdin);
     if (strlen(input) != 0) strncpy(contact->LastName, input, MAX_LENGTH);
-    printf("Имя (%s): ", contact->FirstName); 
+    printf("пїЅпїЅпїЅ (%s): ", contact->FirstName); 
     fgets(input, MAX_LENGTH, stdin);
     if (strlen(input) != 0) strncpy(contact->FirstName, input, MAX_LENGTH);
-    printf("Отчество (%s): ", contact->MiddleName); 
+    printf("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (%s): ", contact->MiddleName); 
     fgets(input, MAX_LENGTH, stdin);
     if (strlen(input) != 0) strncpy(contact->MiddleName, input, MAX_LENGTH);
-    printf("Место работы (%s): ", contact->Workplace); 
+    printf("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (%s): ", contact->Workplace); 
     fgets(input, MAX_LENGTH, stdin);
     if (strlen(input) != 0) strncpy(contact->Workplace, input, MAX_LENGTH);
-    printf("Должность (%s): ", contact->Position); 
+    printf("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (%s): ", contact->Position); 
     fgets(input, MAX_LENGTH, stdin);
     if (strlen(input) != 0) strncpy(contact->Position, input, MAX_LENGTH);
 }
 
 void editContactInfo(ContactInfo* contactInfo) {
     char input[MAX_LENGTH];
-    printf("Номер телефона (%s): ", contactInfo->Phone); 
+    printf("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (%s): ", contactInfo->Phone); 
     fgets(input, MAX_LENGTH, stdin);
     if (strlen(input) != 0) strncpy(contactInfo->Phone, input, MAX_LENGTH);
-    printf("Адрес электронной почты (%s): ", contactInfo->Email); 
+    printf("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (%s): ", contactInfo->Email); 
     fgets(input, MAX_LENGTH, stdin);
     if (strlen(input) != 0) strncpy(contactInfo->Email, input, MAX_LENGTH);
-    printf("Ссылки на страницы и профили (%s): ", contactInfo->Link); 
+    printf("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (%s): ", contactInfo->Link); 
     fgets(input, MAX_LENGTH, stdin);
     if (strlen(input) != 0) strncpy(contactInfo->Link, input, MAX_LENGTH);
 }
@@ -93,11 +93,11 @@ void deleteContact(Contact* contacts, int *count, int index) {
 
 int getIndexOfContact() {
     int index;
-    printf("Введите номер контакта: ");
+    printf("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: ");
     scanf("%d", &index); getchar();
     while (getchar() != '\n');
     if (index < 1 || index > count) {
-        printf("Неверный номер!\n");
+        printf("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ!\n");
         return -1;
     }
     return index - 1;
