@@ -1,2 +1,2 @@
 all:
-	gcc main.c contact.c contact.h -0 contact.exe
+	gcc main.c contact.c contact.h -o contact.exe
