@@ -44,46 +44,50 @@ mode_t printNumbers(char *str) {
 mode_t modifyRights(mode_t st_mode, char *cmd) {
     mode_t new_mode = st_mode;
     int i = 0;
-    if (cmd[0] != 'u' || cmd[0] != 'g' || cmd[0] != 'o' || cmd[0] != 'a') {
+    if (cmd[0] != 'u' && cmd[0] != 'g' && cmd[0] != 'o' && cmd[0] != 'a') {
         printf("ERROR\n");
-        return;
+        return -1;
     }
-    char *delimiter; *who, *what;
-    char delimiters[3] = ['-', '+', '=']
-    /*for(int i = 0; i < strlen(delimiters); i++) {
-        if (strchr(cmd, delimiters[i]) != NULL)
-            delimiter = delimiters[i];
-    }*/
+    char delimiter, *who, *what;
+    char delimiters[3] = { '-', '+', '=' };
     delimiter = (strchr(cmd, '+') != NULL) ? '+' : (strchr(cmd, '-') != NULL) ? '-' : '=';
-    who = strtok(cmd, delimiter);
-    what = strtok(NULL, delimiter);
+    who = strtok(cmd, &delimiter);
+    what = strtok(NULL, &delimiter);
+    if(strchr(who, 'a'))
+        who = "ugo";
     for(int j = 0; j < strlen(what); j++) {    
         for(int i = 0; i < strlen (who); i++) {
             mode_t bit = 0;
             switch(who[i]) {
                 case 'u': 
-                    bit = (what[j] == 'r') ? S_IRUSR : (what[j] == 'w') ? S_IWUSR : S_IXUSR; 
+                    bit = (what[j] == 'r') ? S_IRUSR : (what[j] == 'w') ? S_IWUSR : (what[j] == 'x') ? S_IXUSR : 0; 
                     break;
                 case 'g': 
-                    bit = (what[j] == 'r') ? S_IRGRP : (what[j] == 'w') ? S_IWGRP : S_IXGRP; 
+                    bit = (what[j] == 'r') ? S_IRGRP : (what[j] == 'w') ? S_IWGRP : (what[j] == 'x') ? S_IXGRP : 0; 
                     break;
                 case 'o': 
-                    bit = (what[j] == 'r') ? S_IROTH : (what[j] == 'w') ? S_IWOTH : S_IXOTH; 
+                    bit = (what[j] == 'r') ? S_IROTH : (what[j] == 'w') ? S_IWOTH : (what[j] == 'x') ? S_IXOTH : 0; 
                     break;
                 default:
+                    return -1;
                     break;
             }
+            if (bit != 0) {
+                if (delimiter == '+') 
+                    new_mode |= bit;
+                else
+                    new_mode &= ~bit;
+            }
+            else 
+                return -1;
         } 
-        if (delimiter == '+') 
-            new_mode |= bit;
-        else
-            new_mode &= ~bit;
     }
     return new_mode;
 }
 
 int main(void) {
     int choice;
+    struct stat st;
     char input[100];
     do {
         printf("1. Enter rights (letters or numbers) and show bitmask\n");
@@ -113,7 +117,6 @@ int main(void) {
                 printf("Enter file name: \n");
                 fgets(input, 100, stdin);
                 input[strcspn(input, "\n")] = 0;
-                struct stat st;
                 if(stat(input, &st) == -1) {
                     printf("ERROR\n");
                     break;
@@ -126,6 +129,23 @@ int main(void) {
                 printf("chmod ");
                 fgets(input, 100, stdin);
                 input[strcspn(input, "\n")] = 0;
+                char *what = strtok(input, " ");
+                char *file = strtok(NULL, " ");
+                if(stat(file, &st) == -1) {
+                    printf("ERROR\n");
+                    break;
+                }
+                mode_t new_mode = modifyRights(st.st_mode, what);
+                printf("%d", new_mode); printf("\n");
+                if (new_mode != -1) {
+                    printf("%s\n", printLetters(st.st_mode));
+                    printf("%o\n", new_mode & 0777);
+                    printf("%s\n", printLetters(new_mode));
+                    printBits(new_mode);
+                }
+                else 
+                    printf("ERROR\n");
+                break;
             case 0:
                 break;
         }
