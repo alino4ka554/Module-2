@@ -1,5 +1,6 @@
 #include <stddef.h>  
 #include <string.h>
+#include <stdlib.h>
 
 #define MAX_LENGTH 50
 #define MAX_CONTACTS 50
@@ -19,15 +20,26 @@ typedef struct Contact {
     ContactInfo Info;
 } Contact;
 
+typedef struct Item
+{
+    Contact value;
+    struct Item* next;
+    struct Item* prev;
+} Item;
+
 extern Contact contacts[MAX_CONTACTS];
 extern int count;
 
-void addContactInfo(ContactInfo* contactInfo);
-void addContact(Contact* contact);
+void addContact();
+Item* DeleteValue(Contact* contact, Item* head);
+Contact* getContact(int index, Item* head);
+Item* InsertValue(Contact contact, Item* head);
+void PrintList(Item* head);
+Contact initContact(char* lastname, char* firstname, char* middlename, char* workplace, char* position);
 void printContactInfo(const ContactInfo* const contactInfo);
 void printContact(const Contact* const contact);
 void editContact(Contact* contact);
-void editContactInfo(ContactInfo* contactInfo);
 void deleteContact(Contact* contacts, int *count, int index);
 int getIndexOfContact();
 void getInput(char *prompt, char *buffer, size_t size, int required);
+void Input(Contact* contact);
